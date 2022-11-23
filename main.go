@@ -14,6 +14,8 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 
+	fybrikEnv "fybrik.io/fybrik/pkg/environment"
+	fybrikTLS "fybrik.io/fybrik/pkg/tls"
 	api "fybrik.io/openmetadata-connector/datacatalog-go/go"
 	occ "fybrik.io/openmetadata-connector/pkg/openmetadata-connector-core"
 	"fybrik.io/openmetadata-connector/pkg/utils"
@@ -85,6 +87,16 @@ func RunCmd() *cobra.Command {
 			DefaultAPIController := occ.NewOpenMetadataAPIController(DefaultAPIService)
 
 			router := api.NewRouter(DefaultAPIController)
+			if fybrikEnv.IsUsingTLS() {
+				tlsConfig, err := fybrikTLS.GetServerConfig(&logger)
+				if err != nil {
+					logger.Error().Msg("failed to get tls config")
+					return
+				}
+				server := http.Server{Addr: ":" + strconv.Itoa(DefaultAPIService.Port), Handler: router, TLSConfig: tlsConfig}
+				server.ListenAndServeTLS("", "")
+				return
+			}
 
 			logger.Info().Msg("Server is starting")
 			http.ListenAndServe(":"+strconv.Itoa(DefaultAPIService.Port), router) //nolint
