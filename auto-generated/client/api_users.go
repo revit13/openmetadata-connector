@@ -1,7 +1,7 @@
 /*
 OpenMetadata Apis
 
-# Overview  OpenMetadata supports REST APIs for getting metadata in and out of metadata store. The API resources are grouped under following categories: - **Data assets** - includes resources for data entities, such as `databases`, `tables`, and `topics`. Resources for data assets created from data, such as `dashboards`, `reports`, `metrics`, and `ML Features` are part of this collection. `pipelines`, `notebooks`, etc. that are used for creating data assets are also available as resources as of this collection. - **Teams and Users** - includes `users`, `teams`, a special type of user called `bots` that performs many automated tasks such as ingestion. - **Services** - are services that OpenMetadata integrates with. Currently `databaseService` is the only service under this collection that represents data sources. In the future, services related to Dashboards, Reports, ETL pipelines will be added under this collection. - **Glossary** - OpenMetadata supports hierarchical tags that can be used to build business vocabulary to describe and classify data available under `tags` resource. 
+# Overview  OpenMetadata supports REST APIs for getting metadata in and out of metadata store. The API resources are grouped under following categories: - **Data assets** - includes resources for data entities, such as `databases`, `tables`, and `topics`. Resources for data assets created from data, such as `dashboards`, `reports`, `metrics`, and `ML Features` are part of this collection. `pipelines`, `notebooks`, etc. that are used for creating data assets are also available as resources as of this collection. - **Teams and Users** - includes `users`, `teams`, a special type of user called `bots` that performs many automated tasks such as ingestion. - **Services** - are services that OpenMetadata integrates with. Currently `databaseService` is the only service under this collection that represents data sources. In the future, services related to Dashboards, Reports, ETL pipelines will be added under this collection. - **Glossary** - OpenMetadata supports hierarchical tags that can be used to build business vocabulary to describe and classify data available under `tags` resource.
 
 API version: 0.11.0
 Contact: openmetadata-dev@googlegroups.com
@@ -20,12 +20,11 @@ import (
 	"strings"
 )
 
-
 // UsersApiService UsersApi service
 type UsersApiService service
 
 type ApiCreateOrUpdateUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
 	createUser *CreateUser
 }
@@ -50,7 +49,7 @@ Create or Update a user.
 func (a *UsersApiService) CreateOrUpdateUser(ctx context.Context) ApiCreateOrUpdateUserRequest {
 	return ApiCreateOrUpdateUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -58,10 +57,10 @@ func (a *UsersApiService) CreateOrUpdateUser(ctx context.Context) ApiCreateOrUpd
 //  @return CreateUser
 func (a *UsersApiService) CreateOrUpdateUserExecute(r ApiCreateOrUpdateUserRequest) (*CreateUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateUser
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.CreateOrUpdateUser")
@@ -132,7 +131,7 @@ func (a *UsersApiService) CreateOrUpdateUserExecute(r ApiCreateOrUpdateUserReque
 }
 
 type ApiCreateUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
 	createUser *CreateUser
 }
@@ -157,7 +156,7 @@ Create a new user.
 func (a *UsersApiService) CreateUser(ctx context.Context) ApiCreateUserRequest {
 	return ApiCreateUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -165,10 +164,10 @@ func (a *UsersApiService) CreateUser(ctx context.Context) ApiCreateUserRequest {
 //  @return User
 func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*User, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *User
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.CreateUser")
@@ -239,9 +238,9 @@ func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*User, *htt
 }
 
 type ApiDeleteUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
+	id         string
 	hardDelete *bool
 }
 
@@ -267,17 +266,17 @@ Users can't be deleted but are soft-deleted.
 func (a *UsersApiService) DeleteUser(ctx context.Context, id string) ApiDeleteUserRequest {
 	return ApiDeleteUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *UsersApiService) DeleteUserExecute(r ApiDeleteUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.DeleteUser")
@@ -341,9 +340,9 @@ func (a *UsersApiService) DeleteUserExecute(r ApiDeleteUserRequest) (*http.Respo
 }
 
 type ApiGenerateJWTTokenForBotUserRequest struct {
-	ctx context.Context
-	ApiService *UsersApiService
-	id string
+	ctx                  context.Context
+	ApiService           *UsersApiService
+	id                   string
 	generateTokenRequest *GenerateTokenRequest
 }
 
@@ -368,8 +367,8 @@ Generate JWT Token for a Bot User.
 func (a *UsersApiService) GenerateJWTTokenForBotUser(ctx context.Context, id string) ApiGenerateJWTTokenForBotUserRequest {
 	return ApiGenerateJWTTokenForBotUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -377,10 +376,10 @@ func (a *UsersApiService) GenerateJWTTokenForBotUser(ctx context.Context, id str
 //  @return string
 func (a *UsersApiService) GenerateJWTTokenForBotUserExecute(r ApiGenerateJWTTokenForBotUserRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GenerateJWTTokenForBotUser")
@@ -452,9 +451,9 @@ func (a *UsersApiService) GenerateJWTTokenForBotUserExecute(r ApiGenerateJWTToke
 }
 
 type ApiGetCurrentLoggedInUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	fields *string
+	fields     *string
 }
 
 // Fields requested in the returned resource
@@ -478,7 +477,7 @@ Get the user who is authenticated and is currently logged in.
 func (a *UsersApiService) GetCurrentLoggedInUser(ctx context.Context) ApiGetCurrentLoggedInUserRequest {
 	return ApiGetCurrentLoggedInUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -486,10 +485,10 @@ func (a *UsersApiService) GetCurrentLoggedInUser(ctx context.Context) ApiGetCurr
 //  @return User
 func (a *UsersApiService) GetCurrentLoggedInUserExecute(r ApiGetCurrentLoggedInUserRequest) (*User, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *User
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetCurrentLoggedInUser")
@@ -561,9 +560,9 @@ func (a *UsersApiService) GetCurrentLoggedInUserExecute(r ApiGetCurrentLoggedInU
 }
 
 type ApiGetJWTTokenForBotUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
+	id         string
 }
 
 func (r ApiGetJWTTokenForBotUserRequest) Execute() (*JWTAuthMechanism, *http.Response, error) {
@@ -582,8 +581,8 @@ Get JWT Token for a Bot User.
 func (a *UsersApiService) GetJWTTokenForBotUser(ctx context.Context, id string) ApiGetJWTTokenForBotUserRequest {
 	return ApiGetJWTTokenForBotUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -591,10 +590,10 @@ func (a *UsersApiService) GetJWTTokenForBotUser(ctx context.Context, id string) 
 //  @return JWTAuthMechanism
 func (a *UsersApiService) GetJWTTokenForBotUserExecute(r ApiGetJWTTokenForBotUserRequest) (*JWTAuthMechanism, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *JWTAuthMechanism
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *JWTAuthMechanism
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetJWTTokenForBotUser")
@@ -664,10 +663,10 @@ func (a *UsersApiService) GetJWTTokenForBotUserExecute(r ApiGetJWTTokenForBotUse
 }
 
 type ApiGetSpecificUserVersionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
-	version string
+	id         string
+	version    string
 }
 
 func (r ApiGetSpecificUserVersionRequest) Execute() (*User, *http.Response, error) {
@@ -687,9 +686,9 @@ Get a version of the user by given `id`
 func (a *UsersApiService) GetSpecificUserVersion(ctx context.Context, id string, version string) ApiGetSpecificUserVersionRequest {
 	return ApiGetSpecificUserVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
-		version: version,
+		ctx:        ctx,
+		id:         id,
+		version:    version,
 	}
 }
 
@@ -697,10 +696,10 @@ func (a *UsersApiService) GetSpecificUserVersion(ctx context.Context, id string,
 //  @return User
 func (a *UsersApiService) GetSpecificUserVersionExecute(r ApiGetSpecificUserVersionRequest) (*User, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *User
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetSpecificUserVersion")
@@ -771,11 +770,11 @@ func (a *UsersApiService) GetSpecificUserVersionExecute(r ApiGetSpecificUserVers
 }
 
 type ApiGetUserByFQNRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	name string
-	fields *string
-	include *string
+	name       string
+	fields     *string
+	include    *string
 }
 
 // Fields requested in the returned resource
@@ -806,8 +805,8 @@ Get a user by `name`.
 func (a *UsersApiService) GetUserByFQN(ctx context.Context, name string) ApiGetUserByFQNRequest {
 	return ApiGetUserByFQNRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
@@ -815,10 +814,10 @@ func (a *UsersApiService) GetUserByFQN(ctx context.Context, name string) ApiGetU
 //  @return User
 func (a *UsersApiService) GetUserByFQNExecute(r ApiGetUserByFQNRequest) (*User, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *User
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUserByFQN")
@@ -894,11 +893,11 @@ func (a *UsersApiService) GetUserByFQNExecute(r ApiGetUserByFQNRequest) (*User, 
 }
 
 type ApiGetUserByIDRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
-	fields *string
-	include *string
+	id         string
+	fields     *string
+	include    *string
 }
 
 // Fields requested in the returned resource
@@ -929,8 +928,8 @@ Get a user by `id`
 func (a *UsersApiService) GetUserByID(ctx context.Context, id string) ApiGetUserByIDRequest {
 	return ApiGetUserByIDRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -938,10 +937,10 @@ func (a *UsersApiService) GetUserByID(ctx context.Context, id string) ApiGetUser
 //  @return User
 func (a *UsersApiService) GetUserByIDExecute(r ApiGetUserByIDRequest) (*User, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *User
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUserByID")
@@ -1017,9 +1016,9 @@ func (a *UsersApiService) GetUserByIDExecute(r ApiGetUserByIDRequest) (*User, *h
 }
 
 type ApiListAllUserVersionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
+	id         string
 }
 
 func (r ApiListAllUserVersionRequest) Execute() (*EntityHistory, *http.Response, error) {
@@ -1038,8 +1037,8 @@ Get a list of all the versions of a user identified by `id`
 func (a *UsersApiService) ListAllUserVersion(ctx context.Context, id string) ApiListAllUserVersionRequest {
 	return ApiListAllUserVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -1047,10 +1046,10 @@ func (a *UsersApiService) ListAllUserVersion(ctx context.Context, id string) Api
 //  @return EntityHistory
 func (a *UsersApiService) ListAllUserVersionExecute(r ApiListAllUserVersionRequest) (*EntityHistory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EntityHistory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EntityHistory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.ListAllUserVersion")
@@ -1120,14 +1119,14 @@ func (a *UsersApiService) ListAllUserVersionExecute(r ApiListAllUserVersionReque
 }
 
 type ApiListUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	fields *string
-	team *string
-	limit *int32
-	before *string
-	after *string
-	include *string
+	fields     *string
+	team       *string
+	limit      *int32
+	before     *string
+	after      *string
+	include    *string
 }
 
 // Fields requested in the returned resource
@@ -1181,7 +1180,7 @@ Get a list of users. Use `fields` parameter to get only necessary fields. Use cu
 func (a *UsersApiService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -1189,10 +1188,10 @@ func (a *UsersApiService) ListUsers(ctx context.Context) ApiListUsersRequest {
 //  @return UserList
 func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (*UserList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UserList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UserList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.ListUsers")
@@ -1279,8 +1278,8 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (*UserList, *h
 }
 
 type ApiLoginUserWithPwdRequest struct {
-	ctx context.Context
-	ApiService *UsersApiService
+	ctx          context.Context
+	ApiService   *UsersApiService
 	loginRequest *LoginRequest
 }
 
@@ -1304,7 +1303,7 @@ Login a user with Password
 func (a *UsersApiService) LoginUserWithPwd(ctx context.Context) ApiLoginUserWithPwdRequest {
 	return ApiLoginUserWithPwdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -1312,10 +1311,10 @@ func (a *UsersApiService) LoginUserWithPwd(ctx context.Context) ApiLoginUserWith
 //  @return LoginToken
 func (a *UsersApiService) LoginUserWithPwdExecute(r ApiLoginUserWithPwdRequest) (*LoginToken, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *LoginToken
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LoginToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.LoginUserWithPwd")
@@ -1386,10 +1385,10 @@ func (a *UsersApiService) LoginUserWithPwdExecute(r ApiLoginUserWithPwdRequest) 
 }
 
 type ApiPatchUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
-	body *map[string]interface{}
+	id         string
+	body       *map[string]interface{}
 }
 
 // JsonPatch with array of operations
@@ -1414,17 +1413,17 @@ Update an existing user using JsonPatch.
 func (a *UsersApiService) PatchUser(ctx context.Context, id string) ApiPatchUserRequest {
 	return ApiPatchUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *UsersApiService) PatchUserExecute(r ApiPatchUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPatch
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.PatchUser")
@@ -1487,9 +1486,9 @@ func (a *UsersApiService) PatchUserExecute(r ApiPatchUserRequest) (*http.Respons
 }
 
 type ApiRevokeJWTTokenForBotUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersApiService
-	id string
+	id         string
 }
 
 func (r ApiRevokeJWTTokenForBotUserRequest) Execute() (*JWTAuthMechanism, *http.Response, error) {
@@ -1508,8 +1507,8 @@ Revoke JWT Token for a Bot User.
 func (a *UsersApiService) RevokeJWTTokenForBotUser(ctx context.Context, id string) ApiRevokeJWTTokenForBotUserRequest {
 	return ApiRevokeJWTTokenForBotUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -1517,10 +1516,10 @@ func (a *UsersApiService) RevokeJWTTokenForBotUser(ctx context.Context, id strin
 //  @return JWTAuthMechanism
 func (a *UsersApiService) RevokeJWTTokenForBotUserExecute(r ApiRevokeJWTTokenForBotUserRequest) (*JWTAuthMechanism, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *JWTAuthMechanism
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *JWTAuthMechanism
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.RevokeJWTTokenForBotUser")

@@ -12,6 +12,7 @@ import (
 
 	"github.com/rs/zerolog"
 
+	fybrikUtils "fybrik.io/fybrik/pkg/connectors/utils"
 	client "fybrik.io/openmetadata-connector/datacatalog-go-client"
 	models "fybrik.io/openmetadata-connector/datacatalog-go-models"
 	api "fybrik.io/openmetadata-connector/datacatalog-go/go"
@@ -319,8 +320,8 @@ func getOpenMetadataClient(ctx context.Context, endpoint, user, password string,
 		client.ServerConfiguration{
 			URL:         endpoint,
 			Description: "Endpoint URL",
-		},
-	},
+		}},
+		HTTPClient: fybrikUtils.GetHTTPClient(logger),
 	}
 	c := client.NewAPIClient(&conf)
 	tokenStruct, r, err := c.UsersApi.LoginUserWithPwd(ctx).

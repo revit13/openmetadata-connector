@@ -15,10 +15,11 @@ import (
 	"gopkg.in/yaml.v2"
 
 	fybrikEnv "fybrik.io/fybrik/pkg/environment"
-	fybrikTLS "fybrik.io/fybrik/pkg/tls"
 	api "fybrik.io/openmetadata-connector/datacatalog-go/go"
 	occ "fybrik.io/openmetadata-connector/pkg/openmetadata-connector-core"
 	"fybrik.io/openmetadata-connector/pkg/utils"
+
+	fybrikTLS "fybrik.io/fybrik/pkg/tls"
 )
 
 const (
@@ -34,6 +35,8 @@ const (
 	FileContainingTagsAndPropertiesNeeded = "File containing tags and custom properties needed for working with Fybrik"
 	ParseCustomizationFileFailed          = "parseCustomizationFile() failed. Exiting"
 )
+
+const ReadHeaderTimeout = 3
 
 func parseCustomizationFile(customizationFile string, logger *zerolog.Logger) (map[string]interface{}, error) {
 	customizationFileBytes, err := os.ReadFile(customizationFile)
@@ -93,8 +96,13 @@ func RunCmd() *cobra.Command {
 					logger.Error().Msg("failed to get tls config")
 					return
 				}
-				server := http.Server{Addr: ":" + strconv.Itoa(DefaultAPIService.Port), Handler: router, TLSConfig: tlsConfig}
-				server.ListenAndServeTLS("", "")
+				server := http.Server{Addr: ":" + strconv.Itoa(DefaultAPIService.Port), Handler: router, TLSConfig: tlsConfig,
+					ReadHeaderTimeout: ReadHeaderTimeout}
+				err = server.ListenAndServeTLS("", "")
+				if err != nil {
+					logger.Error().Err(err).Msg(err.Error())
+					return
+				}
 				return
 			}
 
