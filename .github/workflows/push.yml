@@ -9,7 +9,7 @@ on:
 
 env:
   DOCKER_HOSTNAME: ghcr.io
-  DOCKER_NAMESPACE: fybrik 
+  DOCKER_NAMESPACE: revit13 
   DOCKER_USERNAME: ${{ github.actor }}
 
 jobs:
@@ -25,15 +25,8 @@ jobs:
     - id: version
       name: Infer version
       run: |
-        if [[ ${GITHUB_REF} == refs/tags/* ]] ;
-        then
-            version="${GITHUB_REF#refs/tags/v}"
-        elif  [[ ${GITHUB_REF} == refs/heads/main ]] ;
-        then
-            version=main
-        fi
-        echo ::set-output name=version::$version
-        echo "DOCKER_TAG=${version}" >> $GITHUB_ENV
+        echo ::set-output name=version:0.0.29
+        echo "DOCKER_TAG=0.0.29" >> $GITHUB_ENV
     - name: Build docker image 
       run: make docker-build
     - name: Docker push
