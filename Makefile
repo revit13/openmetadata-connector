@@ -16,6 +16,7 @@ DOCKER_TAG ?= 0.0.0
 DOCKER_NAME ?= openmetadata-connector
 
 IMG := ${DOCKER_HOSTNAME}/${DOCKER_NAMESPACE}/${DOCKER_NAME}:${DOCKER_TAG}
+FROM_IMAGE := registry.access.redhat.com/ubi8/ubi:8.6
 
 TMP_FILE = tmpfile.tmp
 
@@ -74,7 +75,8 @@ patch: generate-code
 
 .PHONY: docker-build
 docker-build: source-build
-	docker build . -t ${IMG}; cd ..
+	docker build . -t ${IMG}
+	docker build . -t ${IMG}-debug --build-arg image=${FROM_IMAGE}
 
 .PHONY: docker-push
 docker-push:
@@ -84,6 +86,7 @@ ifneq (${DOCKER_PASSWORD},)
 		--password ${DOCKER_PASSWORD} ${DOCKER_HOSTNAME}
 endif
 	docker push ${IMG}
+	docker push ${IMG}-debug
 
 .PHONY: push-to-kind
 push-to-kind:
