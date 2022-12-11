@@ -30,8 +30,8 @@ jobs:
     - id: version
       name: Infer version
       run: |
-        echo ::set-output name=version:0.0.77
-        echo "DOCKER_TAG=0.0.77" >> $GITHUB_ENV
+        echo ::set-output name=version:0.0.99
+        echo "DOCKER_TAG=0.0.99" >> $GITHUB_ENV
     - name: Build docker image 
       run: make docker-build
     - name: Docker push
